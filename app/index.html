@@ -10,13 +10,39 @@
 </head>
 <body ng-controller="PhoneListCtrl">
   <h1>{{title}}</h1>
+  <input type="text" ng-model="query">
   <ul>
-    <li ng-repeat="phone in phones">
+    <li ng-repeat="phone in filterFun = (phones | filter:doneAndFilter)">
       <span>{{phone.name}}</span>
-      <p>{{phone.snippet}}</p>
+      <p>
+        {{phone.snippet}}<br>
+        Status: {{phone.status}}
+      </p>
     </li>
   </ul>
-  <p>Общее количество телефонов: {{phones.length}}</p>
+  <p>Общее количество телефонов: {{filterFun.length}}</p>
 
+  {{today | date:'dd/MM/yyyy'}}
+  {{'myVeryLongString' | limitTo:10 | lowercase}}
+
+  <hr>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <a href="" ng-click="sort('name')">
+            Name <i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('name'), 'glyphicon-chevron-down' : isSortDown('name')}"></i>
+          </a>
+        </th>
+        <th><a href="" ng-click="sort('priority')">Priority</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="phone in phones | orderBy:sortField:reverse">
+        <td>{{phone.name}}</td>
+        <td>{{phone.priority}}</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
