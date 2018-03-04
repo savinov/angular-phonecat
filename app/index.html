@@ -12,7 +12,7 @@
   <h1>{{title}}</h1>
   <input type="text" ng-model="query">
   <ul>
-    <li ng-repeat="phone in filterFun = (phones | filter:doneAndFilter)">
+    <li ng-repeat="phone in phones">
       <span>{{phone.name}}</span>
       <p>
         {{phone.snippet}}<br>
@@ -20,7 +20,7 @@
       </p>
     </li>
   </ul>
-  <p>Общее количество телефонов: {{filterFun.length}}</p>
+  <p>Общее количество телефонов: {{phones.length}}</p>
 
   {{today | date:'dd/MM/yyyy'}}
   {{'myVeryLongString' | limitTo:10 | lowercase}}
